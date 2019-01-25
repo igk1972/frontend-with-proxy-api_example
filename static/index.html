@@ -1,0 +1,30 @@
+Salut!
+
+<script>
+
+	function ready() {
+		console.log('DOM ready')
+
+		fetch('/hello')
+			.catch(error => {
+				console.log(error)
+			})
+			.then(resp => resp.text())
+			.then(text => {
+				console.log(text)
+			})
+
+		fetch('/api')
+		.catch(error => {
+			console.log(error)
+		})
+		.then(resp => resp.json())
+		.then(json => {
+			console.log(json)
+		})
+
+	}
+
+  document.addEventListener("DOMContentLoaded", ready)
+
+</script>
