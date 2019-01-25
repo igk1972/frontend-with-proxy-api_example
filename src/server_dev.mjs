@@ -16,13 +16,21 @@ const agent = Agent({
 	keepAlive: true,
 })
 
-const httpsCert = function(certName){
-	const fileName = path.join('.', certName)
-	if (fs.existsSync(fileName)) {
-		agent.ca = fs.readFileSync(fileName)
+const httpsCert = function(name){
+	const fileCert = path.join('.', name)
+	if (fs.existsSync(fileCert)) {
+		agent.cert = fs.readFileSync(fileCert)
 	}
 }
-httpsCert('ca.pem')
+const httpsKey = function(name){
+	const fileKey = path.join('.', name)
+	if (fs.existsSync(fileKey)) {
+		agent.key = fs.readFileSync(fileKey)
+	}
+}
+
+httpsCert('cert.pem')
+httpsKey('key.pem')
 
 
 const browser = browserSync.create()
