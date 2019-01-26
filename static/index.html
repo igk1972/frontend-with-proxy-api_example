@@ -14,14 +14,14 @@ Salut!
 				console.log(text)
 			})
 
-		fetch('/api')
-		.catch(error => {
-			console.log(error)
-		})
-		.then(resp => resp.json())
-		.then(json => {
-			console.log(json)
-		})
+		fetch('/api/todos/1')
+			.catch(error => {
+				console.log(error)
+			})
+			.then(resp => resp.json())
+			.then(json => {
+				console.log(json)
+			})
 
 	}
 

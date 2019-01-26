@@ -7,30 +7,38 @@
 
 import fs from 'fs'
 import path from 'path'
-import {Agent} from 'https'
 import browserSync from 'browser-sync'
 import httpProxy from 'http-proxy-middleware'
 
 
-const agent = Agent({
-	keepAlive: true,
-})
+const target_api = {
+	protocol: 'https:',
+	host: 'jsonplaceholder.typicode.com',
+	method: 'GET',
+  headers: {
+    accept: 'application/json'
+	},
+}
 
-const httpsCert = function(name){
+const httpsCert = function(name = 'cert.pem'){
 	const fileCert = path.join('.', name)
 	if (fs.existsSync(fileCert)) {
-		agent.cert = fs.readFileSync(fileCert)
+		target_api.cert = fs.readFileSync(fileCert)
 	}
 }
-const httpsKey = function(name){
+const httpsKey = function(name = 'key.pem'){
 	const fileKey = path.join('.', name)
 	if (fs.existsSync(fileKey)) {
-		agent.key = fs.readFileSync(fileKey)
+		target_api.key = fs.readFileSync(fileKey)
 	}
 }
+const httpsPass = function(){
+	target_api.passphrase = process.env.CERT_PASS
+}
 
-httpsCert('cert.pem')
-httpsKey('key.pem')
+httpsCert()
+httpsKey()
+httpsPass()
 
 
 const browser = browserSync.create()
@@ -46,10 +54,14 @@ browser.init({
 	files: ['./static/*.html', './static/**/*.{html,js,css}'],
 	middleware: [
 		httpProxy('/api', {
-			pathRewrite: {'^/api' : ''},
-			target: 'https://jsonplaceholder.typicode.com/todos/1',
+			pathRewrite: {'^/api': ''},
+			target: Object.assign(
+				{
+					path: '',
+				},
+				target_api
+			),
 			changeOrigin: true,
-			agent: agent,
 			logLevel: 'debug',
 		}),
 		{
