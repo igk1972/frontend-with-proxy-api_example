@@ -5,9 +5,8 @@
 
 'use strict'
 
-
 global.require = require('esm')(module)
 
 const env = process.env.NODE_ENV === 'production' ? 'prod' :'dev'
 
-global.require('./server_' + env + '.mjs')
+global.require('./server_' + env + '.js')

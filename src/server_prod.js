@@ -21,4 +21,4 @@ httpProxy('/api', {
   changeOrigin: true,
   agent: agent,
   logLevel: 'error',
-}),
+})
