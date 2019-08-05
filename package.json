@@ -10,12 +10,13 @@
         "mode": "auto"
     },
     "dependencies": {
-        "esm": "^3.0.48",
-        "express": "^4.16.4",
-        "http-proxy-middleware": "^0.19.1",
-        "natives": "^1.1.6"
+        "esm": "3.2.25",
+        "express": "4.17.1",
+        "http-proxy-middleware": "0.19.1",
+        "natives": "1.1.6",
+        "npm": "6.10.2"
     },
     "devDependencies": {
-        "browser-sync": "arfeo/browser-sync"
+        "browser-sync": "2.26.7"
     }
 }
