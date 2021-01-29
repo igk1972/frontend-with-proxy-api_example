@@ -12,11 +12,10 @@
     "dependencies": {
         "esm": "3.2.25",
         "express": "4.17.1",
-        "http-proxy-middleware": "0.19.1",
-        "natives": "1.1.6",
-        "npm": "6.10.2"
+        "http-proxy-middleware": "1.0.6",
+        "natives": "1.1.6"
     },
     "devDependencies": {
-        "browser-sync": "2.26.7"
+        "browser-sync": "2.26.14"
     }
 }
