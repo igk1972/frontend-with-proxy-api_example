@@ -1,21 +1,15 @@
 {
-    "private": true,
-    "scripts": {},
-    "engines": {
-        "node": ">= 10.0.0"
-    },
-    "esm": {
-        "await": true,
-        "cjs": true,
-        "mode": "auto"
-    },
-    "dependencies": {
-        "esm": "3.2.25",
-        "express": "4.17.1",
-        "http-proxy-middleware": "1.0.6",
-        "natives": "1.1.6"
-    },
-    "devDependencies": {
-        "browser-sync": "2.26.14"
-    }
+  "private": true,
+  "type": "module",
+  "scripts": {},
+  "engines": {
+    "node": ">= 20.0.0"
+  },
+  "dependencies": {
+    "express": "4.19.2",
+    "http-proxy-middleware": "3.0.0"
+  },
+  "devDependencies": {
+    "browser-sync": "3.0.2"
+  }
 }
