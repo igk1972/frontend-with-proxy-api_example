@@ -1,8 +1,3 @@
-/* jshint esversion: 6 */
-/* jshint asi: true */
-/* jshint node: true */
-/* jshint varstmt: true */
-
 'use strict'
 
 import fs from 'fs'

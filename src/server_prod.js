@@ -1,8 +1,3 @@
-/* jshint esversion: 6 */
-/* jshint asi: true */
-/* jshint node: true */
-/* jshint varstmt: true */
-
 'use strict'
 
 import express from 'express'
@@ -39,10 +34,10 @@ app.use(
       },
       target_api
     ),
-  changeOrigin: true,
-  agent: agent,
-  logLevel: 'error',
-})
+    changeOrigin: true,
+    agent: agent,
+    logLevel: 'error',
+  })
 )
 
 app.use(
