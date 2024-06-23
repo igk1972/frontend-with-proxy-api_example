@@ -8,7 +8,7 @@
 import fs from 'fs'
 import path from 'path'
 import browserSync from 'browser-sync'
-import httpProxy from 'http-proxy-middleware'
+import { createProxyMiddleware } from 'http-proxy-middleware'
 
 
 const target_api = {
@@ -53,8 +53,13 @@ browser.init({
 	port: 8080,
 	files: ['./static/*.html', './static/**/*.{html,js,css}'],
 	middleware: [
-		httpProxy('/api', {
-			pathRewrite: {'^/api': ''},
+		createProxyMiddleware({
+      pathFilter: [
+        '/api/**',
+      ],
+			pathRewrite: {
+        '^/api': '',
+      },
 			target: Object.assign(
 				{
 					path: '',
@@ -65,11 +70,11 @@ browser.init({
 			logLevel: 'debug',
 		}),
 		{
-			route: "/hello",
+			route: '/hello',
 			handle: function (req, res, next) {
 				let body = 'Hi!'
-				res.end(body);
+				res.end(body)
 			}
-		}
-	]
+		},
+	],
 })

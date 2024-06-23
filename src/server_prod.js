@@ -5,20 +5,52 @@
 
 'use strict'
 
-import fs from 'fs'
-import path from 'path'
+import express from 'express'
 import {Agent} from 'https'
-import httpProxy from 'http-proxy-middleware'
+import { createProxyMiddleware } from 'http-proxy-middleware'
 
+const target_api = {
+	protocol: 'https:',
+	host: 'jsonplaceholder.typicode.com',
+	method: 'GET',
+  headers: {
+    accept: 'application/json'
+	},
+}
 
 const agent = Agent({
 	keepAlive: true,
 })
 
-httpProxy('/api', {
-  pathRewrite: {'^/api' : ''},
-  target: 'https://jsonplaceholder.typicode.com/todos/1',
+
+const app = express()
+
+app.use(
+  createProxyMiddleware({
+    pathFilter: [
+      '/api/**',
+    ],
+    pathRewrite: {
+      '^/api': '',
+    },
+    target: Object.assign(
+      {
+        path: '',
+      },
+      target_api
+    ),
   changeOrigin: true,
   agent: agent,
   logLevel: 'error',
 })
+)
+
+app.use(
+  '/hello',
+  function (req, res, next) {
+    let body = 'Hi!'
+    res.end(body)
+  }
+)
+
+app.listen(8080)
